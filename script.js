@@ -1,13 +1,14 @@
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Enquiry form -> Web3Forms (https://web3forms.com)
-// Replace the access_key value in index.html with your own from web3forms.com.
+// Enquiry form -> opens WhatsApp with prefilled message to coach
+const COACH_WHATSAPP = '916383621668'; // country code + number, no '+' or spaces
+
 const form = document.getElementById('enquiryForm');
 const status = document.getElementById('formStatus');
 const submitBtn = document.getElementById('submitBtn');
 
-form.addEventListener('submit', async (e) => {
+form.addEventListener('submit', (e) => {
   e.preventDefault();
   status.hidden = true;
   status.className = 'form-status';
@@ -24,57 +25,34 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  if (data.access_key === 'YOUR_WEB3FORMS_ACCESS_KEY' || !data.access_key) {
-    status.innerHTML = 'Form not configured yet. Get a free access key at <a href="https://web3forms.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">web3forms.com</a> and paste it into index.html.';
-    status.classList.add('err');
-    status.hidden = false;
-    return;
-  }
-
-  // Build a clean message body so the email reads nicely
+  // Build a clean WhatsApp message
   const lines = [
-    `Name:    ${data.name}`,
-    `Email:   ${data.email}`,
-    `Phone:   ${data.phone}`,
-    data.age ? `Age:     ${data.age}` : null,
-    `Goal:    ${data.goal}`,
-    `Program: ${data.program}`,
+    '*New Fitness Enquiry — Shape Up*',
     '',
-    'Message:',
-    data.message || '(none)',
-  ].filter(l => l !== null);
-  data.message = lines.join('\n');
-  data.subject = `New Fitness Enquiry — ${data.name} (${data.goal})`;
-  data.replyto = data.email;
-
-  submitBtn.disabled = true;
-  const originalLabel = submitBtn.textContent;
-  submitBtn.textContent = 'Sending...';
-
-  try {
-    const res = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    const json = await res.json();
-
-    if (res.ok && json.success) {
-      form.reset();
-      status.innerHTML = '&#10003; Thank you! Your enquiry has been sent. Mohan will reply within a few hours.';
-      status.classList.add('ok');
-      status.hidden = false;
-    } else {
-      throw new Error(json.message || 'Submission failed');
-    }
-  } catch (err) {
-    status.innerHTML = `Could not send right now. Please WhatsApp <a href="https://wa.me/916383621668" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">+91 63836 21668</a> directly.`;
-    status.classList.add('err');
-    status.hidden = false;
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = originalLabel;
+    `*Name:* ${data.name}`,
+    `*Email:* ${data.email}`,
+    `*Phone:* ${data.phone}`,
+    data.age ? `*Age:* ${data.age}` : null,
+    `*Goal:* ${data.goal}`,
+    `*Program:* ${data.program}`,
+  ];
+  if (data.message && data.message.trim()) {
+    lines.push('', '*Message:*', data.message.trim());
   }
+
+  const text = encodeURIComponent(lines.filter(l => l !== null).join('\n'));
+  const url = `https://wa.me/${COACH_WHATSAPP}?text=${text}`;
+
+  status.innerHTML = '&#10003; Opening WhatsApp to send your enquiry...';
+  status.classList.add('ok');
+  status.hidden = false;
+
+  window.open(url, '_blank', 'noopener');
+
+  setTimeout(() => {
+    form.reset();
+    status.hidden = true;
+  }, 4000);
 });
 
 // Smooth-scroll active highlight

@@ -173,6 +173,17 @@ p  { margin: 0 0 1em; color: var(--muted); }
   background: linear-gradient(135deg, rgba(43,140,255,.25), rgba(56,193,255,.05));
   border: 1px solid var(--line);
   padding: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.coach-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: var(--radius);
+  display: block;
 }
 .photo-placeholder {
   width: 100%; height: 100%; border-radius: var(--radius);

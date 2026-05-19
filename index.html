@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mohan Raj | Online Fitness Program</title>
+<title>Shape Up | Online Fitness Program by Mohan Raj</title>
 <meta name="description" content="Personalized online fitness program with workout plans, progress tracking, and professional diet plans by coach Mohan Raj." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
   <div class="container nav-inner">
     <a href="#home" class="logo">
       <span class="logo-icon">&#10084;</span>
-      <span>FIT<strong>PRO</strong></span>
+      <span>SHAPE <strong>UP</strong></span>
     </a>
     <nav class="nav-links">
       <a href="#home">Home</a>
@@ -97,7 +97,9 @@
   <div class="container grid grid-2 about-grid">
     <div class="about-photo">
       <div class="about-photo-frame">
-        <div class="photo-placeholder">
+        <img src="mohan.jpeg" alt="Coach Mohan Raj" class="coach-photo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+        <div class="photo-placeholder" style="display:none">
           <span>Coach<br/>Mohan Raj</span>
         </div>
       </div>
@@ -176,10 +178,6 @@
     </div>
 
     <form id="enquiryForm" class="form" novalidate>
-      <!-- Web3Forms config: replace access_key after signup at https://web3forms.com -->
-      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
-      <input type="hidden" name="subject" value="New Fitness Program Enquiry" />
-      <input type="hidden" name="from_name" value="FitPro Website" />
       <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
 
       <div class="field">
@@ -227,8 +225,8 @@
         <label for="message">Message (optional)</label>
         <textarea id="message" name="message" rows="4" placeholder="Anything I should know — injuries, diet preferences, schedule..."></textarea>
       </div>
-      <button type="submit" id="submitBtn" class="btn btn-primary btn-block">Send Enquiry &#9658;</button>
-      <p class="form-note">We'll email Mohan and he'll reply on WhatsApp or email within a few hours.</p>
+      <button type="submit" id="submitBtn" class="btn btn-primary btn-block">Send Enquiry on WhatsApp &#9658;</button>
+      <p class="form-note">Tap send and your details open in WhatsApp to <strong>+91 63836 21668</strong>. Hit send there and Mohan will reply soon.</p>
       <div id="formStatus" class="form-status" hidden></div>
     </form>
   </div>
@@ -242,14 +240,14 @@
         <span class="logo-icon">&#10084;</span>
         <span>FIT<strong>PRO</strong></span>
       </div>
-      <p class="muted">Online fitness coaching by Mohan Raj.</p>
+      <p class="muted">Shape Up — online fitness coaching by Mohan Raj.</p>
     </div>
     <div class="footer-links">
       <a href="#features">Features</a>
       <a href="#programs">Programs</a>
       <a href="#enquiry">Enquiry</a>
     </div>
-    <div class="muted small">&copy; <span id="year"></span> Mohan Raj Fitness. All rights reserved.</div>
+    <div class="muted small">&copy; <span id="year"></span> Shape Up by Mohan Raj. All rights reserved.</div>
   </div>
 </footer>
 
